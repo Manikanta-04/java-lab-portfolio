@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Programming Laboratory - N.MANIKANTA</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #1a2332;
+            min-height: 100vh;
+            display: flex;
+            overflow: hidden;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: #283342;
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            z-index: 10;
+        }
+
+        .profile-section {
+            padding: 32px 24px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 8px;
+        }
+
+        .profile-img {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid #4a9eff;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .profile-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .profile-img .initials {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #4a9eff 0%, #6366f1 100%);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .online-indicator {
+            width: 14px;
+            height: 14px;
+            background: #10b981;
+            border: 2px solid #283342;
+            border-radius: 50%;
+            position: absolute;
+            bottom: 2px;
+            right: 2px;
+        }
+
+        .profile-info h1 {
+            color: #ffffff;
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .profile-info p {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 13px;
+        }
+
+        .weeks-section {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px 0;
+            max-height: calc(100vh - 250px);
+        }
+
+        .weeks-header {
+            padding: 12px 24px;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .week-item {
+            padding: 14px 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-left: 3px solid transparent;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .week-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: #ffffff;
+        }
+
+        .week-item.active {
+            background: rgba(74, 158, 255, 0.15);
+            border-left-color: #4a9eff;
+            color: #ffffff;
+        }
+
+        .week-item svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+            flex-shrink: 0;
+        }
+
+        .week-item span {
+            font-size: 15px;
+            font-weight: 500;
+            flex: 1;
+        }
+
+        .week-item .arrow {
+            width: 16px;
+            height: 16px;
+            opacity: 0.5;
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: #1a2332;
+            overflow: hidden;
+        }
+
+        .top-bar {
+            background: #2d3a4d;
+            padding: 16px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .top-bar h2 {
+            color: #ffffff;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .top-bar-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .top-bar-info .badge {
+            background: rgba(74, 158, 255, 0.2);
+            color: #4a9eff;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .download-btn {
+            background: #4a9eff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .download-btn:hover {
+            background: #3b8eef;
+            transform: translateY(-1px);
+        }
+
+        .content-area {
+            flex: 1;
+            overflow-y: auto;
+            padding: 32px;
+            background: #f5f7fa;
+        }
+
+        .pdf-viewer {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            max-width: 100%;
+            margin: 0 auto;
+            height: calc(100vh - 150px);
+            overflow: hidden;
+        }
+
+        .pdf-content h1 {
+            color: #1a2332;
+            font-size: 32px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 12px;
+            border-bottom: 2px solid #1a2332;
+            padding-bottom: 8px;
+        }
+
+        .pdf-content h2 {
+            color: #1a2332;
+            font-size: 24px;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 12px;
+            text-decoration: underline;
+        }
+
+        .pdf-content h3 {
+            color: #1a2332;
+            font-size: 18px;
+            font-weight: 600;
+            text-align: center;
+            margin: 24px 0 32px;
+        }
+
+        .pdf-content .section {
+            margin-bottom: 32px;
+        }
+
+        .pdf-content .section-title {
+            color: #1a2332;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .pdf-content .code-block {
+            background: #f8f9fa;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            padding: 16px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            line-height: 1.6;
+            color: #1a2332;
+            overflow-x: auto;
+            margin: 12px 0;
+        }
+
+        .pdf-content .description {
+            color: #4b5563;
+            font-size: 14px;
+            line-height: 1.8;
+            margin: 12px 0;
+        }
+
+        .footer-section {
+            padding: 16px 24px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 12px;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                position: fixed;
+                left: -280px;
+                height: 100%;
+                transition: left 0.3s ease;
+                z-index: 100;
+            }
+
+            .sidebar.open {
+                left: 0;
+            }
+
+            .content-area {
+                padding: 16px;
+            }
+
+            .pdf-viewer {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="profile-section">
+            <div class="profile-header">
+                <div class="profile-img">
+                    <img src="profile.jpg" alt="N.MANIKANTA" onerror="imageError()" onload="imageLoaded()">
+                    <div class="initials">NM</div>
+                    <div class="online-indicator"></div>
+                </div>
+                <div class="profile-info">
+                    <h1>N.MANIKANTA</h1>
+                    <p>Roll: 238W1A12A7</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="weeks-section">
+            <div class="weeks-header">Weeks</div>
+            
+            <div class="week-item active" onclick="selectWeek(1)">
+                <svg viewBox="0 0 24 24"><path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/></svg>
+                <span>Week 1</span>
+                <svg class="arrow" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"/></svg>
+            </div>
+
+            <div class="week-item" onclick="selectWeek(2)">
+                <svg viewBox="0 0 24 24"><path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/></svg>
+                <span>Week 2</span>
+                <svg class="arrow" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"/></svg>
+            </div>
+
+            <div class="week-item" onclick="selectWeek(3)">
+                <svg viewBox="0 0 24 24"><path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/></svg>
+                <span>Week 3</span>
+                <svg class="arrow" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"/></svg>
+            </div>
+
+            <div class="week-item" onclick="selectWeek(4)">
+                <svg viewBox="0 0 24 24"><path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/></svg>
+                <span>Week 4</span>
+                <svg class="arrow" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"/></svg>
+            </div>
+
+            <div class="week-item" onclick="selectWeek(5)">
+                <svg viewBox="0 0 24 24"><path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/></svg>
+                <span>Week 5</span>
+                <svg class="arrow" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"/></svg>
+            </div>
+
+            <div class="week-item" onclick="selectWeek(6)">
+                <svg viewBox="0 0 24 24"><path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/></svg>
+                <span>Week 6</span>
+                <svg class="arrow" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"/></svg>
+            </div>
+
+            <div class="week-item" onclick="selectWeek(7)">
+                <svg viewBox="0 0 24 24"><path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/></svg>
+                <span>Week 7</span>
+                <svg class="arrow" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"/></svg>
+            </div>
+
+            <div class="week-item" onclick="selectWeek(8)">
+                <svg viewBox="0 0 24 24"><path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/></svg>
+                <span>Week 8</span>
+                <svg class="arrow" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"/></svg>
+            </div>
+
+            <div class="week-item" onclick="selectWeek(9)">
+                <svg viewBox="0 0 24 24"><path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/></svg>
+                <span>Week 9</span>
+                <svg class="arrow" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"/></svg>
+            </div>
+
+            <div class="week-item" onclick="selectWeek(10)">
+                <svg viewBox="0 0 24 24"><path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/></svg>
+                <span>Week 10</span>
+                <svg class="arrow" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"/></svg>
+            </div>
+
+            <div class="week-item" onclick="selectWeek(11)">
+                <svg viewBox="0 0 24 24"><path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/></svg>
+                <span>Week 11</span>
+                <svg class="arrow" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"/></svg>
+            </div>
+
+            <div class="week-item" onclick="selectWeek(12)">
+                <svg viewBox="0 0 24 24"><path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/></svg>
+                <span>Week 12</span>
+                <svg class="arrow" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"/></svg>
+            </div>
+        </div>
+
+        <div class="footer-section">
+            Java Programming Laboratory
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="top-bar">
+            <div>
+                <h2 id="weekTitle">Week 1</h2>
+                <p style="color: rgba(255,255,255,0.6); font-size: 14px; margin-top: 4px;">Laboratory Record</p>
+            </div>
+            <div class="top-bar-info">
+                <div class="badge">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
+                    </svg>
+                    Java Lab
+                </div>
+                <button class="download-btn" onclick="downloadWeek()">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z"/>
+                    </svg>
+                    Download
+                </button>
+            </div>
+        </div>
+
+        <div class="content-area">
+            <div class="pdf-viewer" id="pdfContent">
+                <iframe id="pdfFrame" style="width: 100%; height: 100%; border: none; border-radius: 12px;" src=""></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const weekData = {
+            1: { title: 'Introduction to Java Basics', topic: 'Week 1' },
+            2: { title: 'PreparedStatement Operations', topic: 'Week 2' },
+            3: { title: 'Object-Oriented Programming', topic: 'Week 3' },
+            4: { title: 'Exception Handling', topic: 'Week 4' },
+            5: { title: 'Collections Framework', topic: 'Week 5' },
+            6: { title: 'Multithreading', topic: 'Week 6' },
+            7: { title: 'File I/O Operations', topic: 'Week 7' },
+            8: { title: 'JDBC Connectivity', topic: 'Week 8' },
+            9: { title: 'Servlets', topic: 'Week 9' },
+            10: { title: 'JSP (JavaServer Pages)', topic: 'Week 10' },
+            11: { title: 'Spring Framework Basics', topic: 'Week 11' },
+            12: { title: 'REST API Development', topic: 'Week 12' }
+        };
+
+        let currentWeek = 1;
+
+        function imageLoaded() {
+            const img = document.querySelector('.profile-img img');
+            const initials = document.querySelector('.profile-img .initials');
+            if (img && initials) {
+                img.style.display = 'block';
+                initials.style.display = 'none';
+            }
+        }
+
+        function imageError() {
+            const img = document.querySelector('.profile-img img');
+            const initials = document.querySelector('.profile-img .initials');
+            if (img && initials) {
+                img.style.display = 'none';
+                initials.style.display = 'flex';
+            }
+        }
+
+        function selectWeek(weekNum) {
+            currentWeek = weekNum;
+            
+            document.querySelectorAll('.week-item').forEach((item, index) => {
+                item.classList.remove('active');
+                if (index === weekNum - 1) {
+                    item.classList.add('active');
+                }
+            });
+
+            document.getElementById('weekTitle').textContent = weekData[weekNum].topic;
+            
+            // Load the actual PDF file
+            const pdfFrame = document.getElementById('pdfFrame');
+            pdfFrame.src = `pdfs/week-${weekNum}.pdf`;
+        }
+
+        function downloadWeek() {
+            const link = document.createElement('a');
+            link.href = `pdfs/week-${currentWeek}.pdf`;
+            link.download = `Week-${currentWeek}-Lab.pdf`;
+            link.target = '_blank';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // Initialize with Week 1 PDF on page load
+        window.addEventListener('DOMContentLoaded', function() {
+            selectWeek(1);
+        });
+    </script>
+</body>
+</html>
