@@ -1,148 +1,162 @@
-📘 Java Lab Portfolio Website – 12 Weeks
-🌐 Live Project
+<div align="center">
 
-🔗 https://manikanta-04.github.io/java-lab-portfolio/
+<img src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white"/>
+<img src="https://img.shields.io/badge/GitHub%20Pages-222222?style=for-the-badge&logo=github&logoColor=white"/>
+<img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white"/>
+<img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white"/>
+<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"/>
 
-📌 Project Overview
+<br/>
 
-The Java Lab Portfolio Website is a professional digital lab record system designed to organize and present 12 weeks of Advanced Java laboratory experiments.
+# 📘 Advanced Java Lab Portfolio
 
-This project allows:
+### A structured digital lab record system for 12 weeks of Advanced Java experiments
 
-Structured week-wise navigation
+[![Live Demo](https://img.shields.io/badge/🌐%20Live%20Demo-Visit%20Site-2ea44f?style=for-the-badge)](https://manikanta-04.github.io/java-lab-portfolio/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
 
-Clean PDF preview of lab records
+</div>
 
-Download option for each week
+---
 
-Professional academic presentation
+## 📌 Overview
 
-Easy access to Java programs
+The **Advanced Java Lab Portfolio** is a professional digital lab record system designed to organize and present **12 weeks of Advanced Java laboratory experiments** in a clean, structured, and accessible format.
 
-It is built as a modern portfolio-style lab submission.
+Built as a portfolio-style static web application, it enables students and evaluators to navigate weekly lab programs with ease — featuring inline PDF previews, download options, and a minimal academic UI.
 
-🎯 Key Features
+> **Deployed on GitHub Pages** — zero backend, zero dependencies, fully static.
 
-✅ Week-wise sidebar navigation (Week 1 – Week 12)
-✅ Professional dashboard layout
-✅ Embedded PDF viewer
-✅ Download button for lab records
-✅ Clean, minimal UI design
-✅ Responsive layout
-✅ Organized academic presentation
-✅ Roll number & student details display
+---
 
-🗂️ Project Structure
+## ✨ Features
+
+| Feature | Description |
+|---|---|
+| 📂 Week-wise Navigation | Sidebar spanning Week 1 to Week 12 |
+| 📄 PDF Viewer | Embedded inline PDF preview per week |
+| ⬇️ Download | One-click download for each week's lab record |
+| 🎨 Clean UI | Minimal dark-theme academic design |
+| 📱 Responsive | Adapts to desktop and tablet screens |
+| 🧑‍🎓 Student Info | Roll number and student details displayed |
+
+---
+
+## 🗂️ Project Structure
+
+```
 java-lab-portfolio/
 │
-├── index.html
-├── week1.html
-├── week2.html
-├── week3.html
-├── ...
-├── week12.html
+├── index.html              # Landing page / Week 1 default view
+├── week1.html – week12.html # Individual week pages
 │
 ├── assets/
-│   ├── pdf/
-│   │   ├── week1.pdf
-│   │   ├── week2.pdf
-│   │   └── ...
-│   └── images/
+│   ├── pdf/                # Lab record PDFs (week1.pdf – week12.pdf)
+│   └── images/             # UI assets
 │
 ├── css/
-│   └── style.css
+│   └── style.css           # Global stylesheet
 │
 ├── js/
-│   └── script.js
+│   └── script.js           # Navigation & PDF rendering logic
 │
 └── README.md
+```
 
-📚 Lab Experiments Covered
-Week 1 – JDBC & MySQL Connection
-Week 2 – CRUD Operations using JDBC
-Week 3 – Servlets
-Week 4 – JSP
-Week 5 – Session Management
-Week 6 – Cookies
-Week 7 – MVC Architecture
-Week 8 – Hibernate Basics
-Week 9 – Spring Framework
-Week 10 – Spring Boot
-Week 11 – REST API
-Week 12 – Mini Project Integration
-🛠️ Technologies Used
+---
 
-HTML5
+## 📚 Lab Experiments
 
-CSS3
+| Week | Topic |
+|------|-------|
+| Week 1  | JDBC & MySQL Connection |
+| Week 2  | CRUD Operations using JDBC |
+| Week 3  | Servlets |
+| Week 4  | JavaServer Pages (JSP) |
+| Week 5  | Session Management |
+| Week 6  | Cookies |
+| Week 7  | MVC Architecture |
+| Week 8  | Hibernate Basics |
+| Week 9  | Spring Framework |
+| Week 10 | Spring Boot |
+| Week 11 | REST API Development |
+| Week 12 | Mini Project Integration |
 
-JavaScript
+---
 
-Embedded PDF Viewer
+## 🛠️ Tech Stack
 
-GitHub Pages (Deployment)
+- **Frontend** — HTML5, CSS3, JavaScript (Vanilla)
+- **PDF Rendering** — Native browser embed / PDF.js
+- **Deployment** — GitHub Pages
 
-🎨 UI Design Features
+---
 
-Dark professional sidebar
+## 🚀 Run Locally
 
-Clean content area
+```bash
+# Clone the repository
+git clone https://github.com/Manikanta-04/java-lab-portfolio.git
 
-Minimal color usage
+# Navigate into the project
+cd java-lab-portfolio
 
-Structured typography
+# Open in browser (no build step required)
+open index.html
+```
 
-Smooth layout alignment
+> ⚠️ For PDF embeds to work correctly locally, serve via a local HTTP server:
+> ```bash
+> python -m http.server 8000
+> # then open http://localhost:8000
+> ```
 
-Modern academic appearance
+---
 
-🚀 How to Run Locally
+## 🌍 Deployment
 
-Clone the repository
+Hosted via **GitHub Pages**.
 
-git clone https://github.com/your-username/java-lab-portfolio.git
+```
+Settings → Pages → Branch: main → Root (/) → Save
+```
 
+Live: [https://manikanta-04.github.io/java-lab-portfolio/](https://manikanta-04.github.io/java-lab-portfolio/)
 
-Open the folder
+---
 
-Open index.html in your browser
+## 🔭 Roadmap
 
-No installation required.
+- [ ] 🔍 Global search across all weeks
+- [ ] 🌙 Dark / Light mode toggle
+- [ ] 📊 Progress tracker for completed experiments
+- [ ] 📦 Bulk ZIP download of all lab records
+- [ ] 🔐 Optional login gate for restricted access
 
-🌍 Deployment
+---
 
-This project is deployed using GitHub Pages.
+## 🎓 Academic Details
 
-To deploy:
+| Field | Details |
+|---|---|
+| **Student** | N. Manikanta |
+| **Roll No.** | 238W1A12A7 |
+| **Program** | B.Tech – Information Technology |
+| **Subject** | Advanced Java Programming Laboratory |
+| **Academic Year** | 2025 – 2026 |
 
-Push project to GitHub
+---
 
-Go to Settings → Pages
+## 📄 License
 
-Select branch (main)
+Released under the [MIT License](LICENSE). Free to fork and adapt for academic use with attribution.
 
-Save
+---
 
-📌 Future Improvements
+<div align="center">
 
-🔍 Add search functionality
+Made with ❤️ by [N. Manikanta](https://github.com/Manikanta-04)
 
-🌙 Add dark/light mode toggle
+⭐ **Star this repo if you found it helpful!**
 
-📊 Add progress tracker for completed weeks
-
-📥 Add downloadable ZIP of all weeks
-
-🔐 Add login system for restricted access
-
-🎓 Academic Purpose
-
-This project is created as a digital Advanced Java Lab Record submission to maintain structured and professional academic documentation.
-
-👨‍💻 Author
-
-N. Manikanta
-Roll No: 238W1A12A7
-B.Tech – IT
-Java Programming Laboratory
-Academic Year: 2025–2026
+</div>
